@@ -1,0 +1,271 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+% These packages are all incorporated in the memoir class to one degree or another...
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+\usepackage{amssymb}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%%% END Article customizations
+
+%%% Theorem Environment
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{assignment}[1][Assignment]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+      \ifdim\lastskip<1.5em \hskip-\lastskip
+      \hskip1.5em plus0em minus0.5em \fi \nobreak
+      \vrule height0.75em width0.5em depth0.25em\fi}
+%%% END Theorem Environment
+
+%%% The "real" document content comes below...
+
+
+\title{Shilov Linear Algebra 1: Determinants}
+\author{Michael Lee}
+
+\begin{document}
+\maketitle
+\section{Number Fields}
+\begin{definition} 
+	A number field is any set of $\mathbb{K}$ of objects, called "numbers," which, when subjected to the four arithmetic operations again give elements of $\mathbb{K}$.
+\begin{itemize}
+\item To every pair of numbers $\alpha$ and $\beta$ in $\mathbb{K}$ there corresponds a unique 		number $\alpha + \beta $ in $\mathbb{K}$, called the sum of $\alpha$ and $\beta$. 	 
+	\begin{enumerate}
+		\item $\alpha + \beta = \beta + \alpha$ for every $\alpha$ and $\beta$ in $\mathbb{K}$ (addition is commutative). 
+		\item $(\alpha + \beta) + \gamma = \alpha + (\beta + \gamma)$, for every $\alpha, \beta, \gamma$ in $\mathbb{K}$. (addition is associative);
+		\item There exists a nbumber 0 (zero) in $\mathbb{K}$ such that $0 + \alpha = \alpha$ for every $\alpha$ in $\mathbb{K}$. 
+		\item For every $\alpha$ in $\mathbb{K}$ there exists a number (negative element) $\gamma$ in $\mathbb{K}$ such that $\alpha + \gamma = 0$.
+	\end{enumerate}
+\item To every pair of numbers $\alpha$ and $\beta$ in $\mathbb{K}$ there corresponds a unique number $\alpha \cdot \beta$ in $\mathbb{K}$, called the product of $\alpha and \beta$, where
+	\begin{enumerate}
+		\item $\alpha\cdot\beta = \beta\cdot\alpha$ for every $\alpha$ and $\beta$ in $\mathbb{K}$ (multiplication is commutative).
+		\item $(\alpha \cdot \beta) \cdot \gamma = \alpha \cdot (\beta \cdot \gamma)$, for every $\alpha, \beta, \gamma$ in $\mathbb{K}$. (multiplication is associative);
+		\item There exists a number 1 (identity) in $\mathbb{K}$ such that $1 \cdot \alpha = \alpha$ for every $\alpha$ in $\mathbb{K}$.
+ 		\item For every $\alpha$ in $\mathbb{K}$ there exists a number (inverse element) $\gamma$ in $\mathbb{K}$ such that $\alpha \cdot \gamma = 1$.
+	\end{enumerate}
+\item Two fields $\mathbb{K}$ and $\mathbb{K}$' are called isomorphic if there is a one-to-one correpsondence between the two fields such that the number associated with every sum(difference) or product(quotient) of numbers in $\mathbb{K}$ is the sum(difference) or product(quotient) of the corresponding numbers in $\mathbb{K}$'.
+\end{itemize}
+\end{definition}
+
+\begin{example}
+	Fields
+	\begin{itemize} 
+		\item Field of rational numbers $\mathbb{Q}$ 
+		\item Field of real numbers $\mathbb{R}$
+		\item Field of complex numbers $\mathbb{C}$
+	\end{itemize} 
+\end{example}
+
+\begin{remark}
+	Fundamental Theorem of Algebra We can not onbly carry out the four arithmetic operations in $\mathbb{C}$ but but also solve any algebraic equation $z^n + {a_1}z^{n - 1} + \ldots + a_n = 0$. The field $\mathbb{R}$ does not have this property. We will use $\mathbb{K}$ to denote an arbitrary number field. If some property is true for the fireld $\mathbb{K}$, then it is automatically true for the field $\mathbb{R}$ and $\mathbb{C}$.
+\end{remark}
+
+\section{Theory of Systems of Linear Equations}
+
+\begin{definition}
+	A general system of linear equations has the form
+	{\center
+		${a_{11}}{x_1} + {a_{12}}{x_2} + \ldots + {a_{1n}}{x_n} = b_1$ 
+		\\ ${a_{21}}{x_1} + {a_{22}}{x_2} + \ldots + {a_{2n}}{x_n} = b_2$
+		\\ \ldots \ldots \ldots
+		\\ ${a_{n1}}{x_1} + {a_{n2}}{x_2} + \ldots + {a_{nn}}{x_n} = b_n$  
+	\\	}
+	Here $x_1, x_2, \ldots, x_n$ denote the unknowns (elements of $\mathbb{K}$). The quantities $a_{11}, a_{12}, \ldots, a_{kn}$, taken from the field $\mathbb{K}$ are called the coefficients of the system. The first index of a coefficient indicates the number of the equation in which the coefficient appears, while the second index indicates the number of the unknown with which the coefficient is associated. The numbers $b_1, b_2, \ldots, b_n$ are also from $\mathbb{K}$ and are called the constant terms of the system. A solution of the ststem is a set of numbers $c_1, c_2, \ldots, c_n$ from $\mathbb{K}$ which, when substituted for the unknowns $x_1, x_2, \ldots, x_n$, turns all the equations of the system into identitites. 
+\end{definition}
+\begin{definition}
+	A system of equations can be
+	\begin{itemize}
+		\item Compatible: when it has at least one solution
+			\begin{enumerate}
+				\item Determinate: when it has a unique solution
+				\item Indeterminate: when it has at least two different solutions
+			\end{enumerate} 
+		\item Incompatible: when it has no solutions 
+	\end{itemize}
+\end{definition}
+\begin{assignment} None \end{assignment}
+
+\section{Determinants of Order $n$}
+\begin{definition}
+	The number of rows and columns of the matrix is called its order. The numbers $a_{ij}$ are called the elements of the matrix. The first index indicates the row and the second index the column in which $a_{ij}$ appears. The elements $a_{11}, a_{22}, \ldots, a_{nn}$ form the principle diagonal of the matrix. 
+\end{definition}
+
+\begin{definition}
+	Consider any product of $n$ elements which appear in differen t rows and different columns of the matrix. Such a product can be written in the form
+	{\center
+		$a_{\alpha_{1}1a_{\alpha_{2}2}}\ldots$$a_{\alpha_{n}n}$
+	\\}
+An inversion in this sequence $\alpha$ is an arrangement of two indices such that the larger index comes before the smaller index. The total number of inversions will be denoted by $N(\alpha_1,\alpha_2,\ldots,\alpha_n)$. If the number of inversions in this sequence is even, we put a plus sign before the product; else if the number is odd, we put a minus sign before the product. Symbolically
+	{\center
+		$(-1)^{N(\alpha_1,\alpha_2,\ldots,\alpha_n)}$ 
+	}
+The total number of products of this form whcih can be formed from the elements of a given order $n$ is equal to the total number of permutations of the number $1, 2, \ldots, n = n!$.
+\end{definition}
+
+\begin{definition}
+	The determinant $D$ of a matrix is meant the algebraic sum of the $n!$ products of the alternating signed permutations. Henceforth the products of this form will be called the terms of the determinant $D$. The elements $a_{ij}$ will be called the elements of $D$
+\end{definition}
+
+\begin{definition}
+	The rule for determining the sign of a given term of a determinant can be formulated somewhat differently (geometrically). Corresponding to the enumeration of elements in the matrix, we can distinguish two natural positive directions, from left to right, from top to bottom. Moreover, the slanting lines joining any two elements of the matrix can be furnished with a direction: we shall say that the line segment joing the element $a_{ij}$ with the elment $a_{kl}$ has positive slope if tis right endpoint lies lower than its left endpoint, and that it has negative slope if its right endpoint lies higher than its left endpoint. 
+\end{definition}
+
+\begin{assignment}
+	Shilov 1: 1, 2, 3
+\end{assignment}
+
+\begin{corollary}
+	A determinant changes sign when two of its columns are interchanged. First, consider the case where two adjacent columns are interchanged. The determinant which is obtained after these columns are interchanged obviously still consists of the same terms as the original determinant. Consider any terms of original determinant containing an element of the $j$th column and an element of the $(j+1)$th column.l If the segment joining these two elements originally had negative slope, then after the interchange of columns, its slope becomes positive. Consequently, the number of segments with negative slope joining the elmenets of the given term changes by one when the two columns are interchanged; therefore each term of the determinant, and hence the determinant itself, changes sign when the columns are interchanged. Next consider the general case of two non-adjacent columns. Perform the same procedure, of considering the sign of the elements of the determinant after the interchange. The positive become negative and the negative become positive. At the end of the process, the determinant will have a sign opposite to its original sign. 
+\end{corollary}
+
+\begin{corollary}
+	A determinant with two identical columns vanishes. 
+\end{corollary}
+
+\begin{proof}
+	Interchanging the columns does not change the determinant D. On the other had, the determinant must change its sign, therefore $D = -D$, which imples that $D = 0$. 
+\end{proof}
+
+\begin{theorem}
+	If all the element of the $j$th column of a determinant $D$ are linear combinations of two columns of numbers, if 
+	{\center
+		$a_{ij} = \lambda b_i + \mu c_i $ \\
+	}
+where $\lambda$ and $\mu$ are fixed numbers, then $D$ is equal to a linear combination of two determinants:
+	{\center
+		$D = \lambda D_1 + \mu D_2 $
+	\\ }
+\end{theorem}
+
+\begin{proof}
+	Every term of the determinasnt $D$ can be represented in the form $a_{{\alpha_1}1}a_{{\alpha_2}2}\ldots a_{{\alpha_j}j} = a_{{\alpha_1}1}a_{{\alpha_2}2}\ldots (\lambda b_{\alpha_1} + \mu c_{\alpha_j} \ldots a_{{\alpha_n}n} = \lambda a_{{\alpha_1}1}a_{{\alpha_2}2}\ldots b_{\alpha_j}\ldots a_{{\alpha_n}n} +  \mu a_{{\alpha_1}1}a_{{\alpha_2}2}\ldots c_{\alpha_j}\ldots a_{{\alpha_n}n}$. 
+\end{proof}
+
+\begin{definition}
+	It is convenient to write this formula in a somewhat different form. Let $D$ be an arbitrary fixed determinant. Denote by $D_j(p_i)$ the determinant which is obtained by replacing the elmenets of the $j$th column of $D$ by the numbers $p_i (i = 1, 2, \ldots, n)$.
+\end{definition}
+
+\begin{corollary}
+	Any common factor of a column of a determinant can be factored out of the determinant
+\end{corollary}
+
+\begin{proof}
+	If $a_{ij} = \lambda b_i$, then we have $D_i(a_{ij}) = D_j(\lambda b_i) = \lambda D_j(b_i). $
+\end{proof}
+
+\begin{corollary}
+	If a column of a determinant consists entirely of zeros, then the determinant vanishes. 
+\end{corollary}
+
+\begin{theorem}
+	The value of a determinant is not changed by adding the elements of one column multiplied by an arbitrary number to the corresponding elements of another column. 
+\end{theorem}
+
+\section{Cofactors and Minors}
+
+\begin{definition}
+	Consider the $j$th column of the determinant $D$. Let $a_{ij}$ be any element of this column. Add up all the terms containing r5he element appearing the right hand side of the equation for $D$ and then factor out the element $a_{ij}$. The quantity that remains $A_{ij}$ is called the cofactor of the element $a_{ij}$ of the determinant $D$. Since every term of the determinant $D$ contains an element from the $j$th column, the equation for $D$ can be written in the form $D = a_{1j}A_{1j} + a_{2j}A{2j} + \ldots + a_{nj}A_{nj}$ called the expansion of the determinant $D$ with respect to the elements of the $j$th column. 
+\end{definition}
+
+\begin{theorem}
+	The sum of all the products of the elements of any column of the determinant $D$ with the corresponding cofactors is equal to the determiant $D$ itself. 
+\end{theorem}
+
+\begin{definition}
+	If we delete a row and a column from a matrix of order n, then of course, the remaining elements form a matrix of order $n - 1$. The determinant of this matrix is called a minor of the original $n$th order matrix. If we delete the $i$th row and the $j$th column of $D$, then the minor so obtained is denoted by $M_{ij}(D)$. 
+	{\center
+		$A_{ij} = (-1)^{i + j}M_{ij} $
+	}
+\end{definition}
+
+\begin{assignment}
+	Shilov 1: 4, 5, 6
+\end{assignment}
+
+\section{Cramer's Rule}
+
+\begin{definition}
+	We are now in a position to solvce systems of linear equations. First, we consider a system which has the same number of unknowns and equations. The coefficients $a_{ij} (i, j = 1, 2, \ldots, n)$ form the coefficient matrix of the system. We assume that the determinant of this matrix is different from zero. 
+\end{definition}
+
+\begin{theorem}
+	A system whose coefficient matrix has a determinant different from zero is both compatible and determinate.
+\end{theorem}
+
+\begin{proof}
+	Let $c_1, c_2,\ldots, c_n$ be the solution set of the system described by the coefficient matrix. Multiply the first of the equations by the cofactor $A_{11}$ of the element $a_{11}$ in the coefficient matrix, then the second by $A_{21}$, and so forth. The coefficient of $c_1$ must be the determinant $D$ itself. The coefficients of all the other $c_j$ vanish. By writting out the expansion of the determinant with respect to its first column, we can now write
+	{\center
+		$Dc_1 = D_1$ 
+	}.
+Analogously, we can obtain the expression
+	{\center
+		$c_j = \frac{D_j}{D}$. 
+	}
+where $D_j$ is the determinant obtained from the determinant $D$ by replacing its $j$th column by the numbers $b_1, b_2, \ldots, b_n$. 
+\end{proof}
+
+\begin{theorem}
+	If the determinant of the system is different from zero, then the system has a unique solution, for the value of the unknown $x_j (j = 1, 2, \ldots, n)$, we take the fraction whose denominator is the determinant $D$ of the system and whose numerator is the determinant obtained by replacing the $j$th column of $D$ by the column consisting of the constant terms of the system. 
+\end{theorem}
+
+\end{document}

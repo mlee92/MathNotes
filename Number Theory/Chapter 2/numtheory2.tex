@@ -1,0 +1,206 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+% These packages are all incorporated in the memoir class to one degree or another...
+
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+\usepackage{amssymb}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%%% END Article customizations
+
+%%% Theorem Environment
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{assignment}[1][Assignment]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+      \ifdim\lastskip<1.5em \hskip-\lastskip
+      \hskip1.5em plus0em minus0.5em \fi \nobreak
+      \vrule height0.75em width0.5em depth0.25em\fi}
+%%% END Theorem Environments by $m$, we say tnot divisible 
+
+%%% The "real" document content comes below...
+
+
+\title{NZM 2: Congruence}
+\author{Michael Lee}
+\date{} % Activate to display a given date or no date (if empty) % otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+
+\section{Congruences}
+
+\begin{definition}
+	If an integer $m$, not zero, divides the difference $a - b$, we say that $a$ is congruent to $b$ modulo $m$ and write $a \equiv b $(mod m). If $a - b$ is not divisible by m say tt $a$ is not conguent to $b$ modulo $m \not\equiv b $ (mod $m$). 
+\end{definition}
+
+\begin{theorem}
+	Let $a, b, c, d, x, y$ denote integers
+	\begin{enumerate}
+		\item $a \equiv b$ (mod $m$), $b \equiv a$ (mod $m$), and $ (a - b) \equiv 0$ (mod $m$) are equivalent statements. 
+		\item If $a \equiv b$ (mod $m$) and $b \equiv c$ (mod $m$) , then $a \equiv c$ (mod $m$). 
+		\item If $a \equiv b$ (mod $m$) and $c \equiv d$ (mod $m$), then $ ax + by \equiv bx + dy$ (mod $m$). 
+		\item If $a \equiv b$ (mod $m$) and $c \equiv d$ (mod $m$), then $ac \equiv bd$ (mod $m$). 
+		\item If $a \equiv b$ (mod $m$) and $d \mid m$, $d \textgreater 0$, then $a \equiv b$ (mod $m$). 
+		\item If $a \equiv b$ (mod $m$)  then $ac \equiv bc$ (mod $mc$), for $c \textgreater 0$. 
+	\end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+	Let $f$ denote a polynomial with integral coefficients. If $a \equiv b $ (mod $m$) then $f(a) \equiv f(b)$ (mod $m$). 
+\end{theorem}
+
+\begin{theorem}
+	\begin{enumerate}
+		\item $ax \equiv ay$ (mod $m$) if and only if $x \equiv y$ (mod $\frac{m}{(a, m)}$) 
+		\item If $ax \equiv ay$ (mod $m$) and $(a, m)$ = 1, then $a \equiv y$ (mod $m$).
+	\end{enumerate}
+\end{theorem}
+
+\begin{definition}
+	If $x \equiv y$ (mod $m$) then $y$ is called a residue of $x$ modulo $m$. A set $x_1, x_2, \ldots x_m$ is called a complte residue system modulo m  if for every integer $y$, there is one and only one $x_j$ such that $y \equiv x_j$ (mod $m$). 
+\end{definition}
+
+\begin{theorem}
+	If $x \equiv y$ (mod $m$), then $(x, m) = (y, m)$. 
+\end{theorem}
+
+\begin{proof}
+	We have $x - y = mz$ for some integer $z$. Since $(x, m) \mid x$ and $(x, m) \mid m$, we have $(x, m) \mid y$ and hend $(x, m) \mid (y, m)$, therefore $(x, m) = (y, m)$. 
+\end{proof}
+
+\begin{definition}
+	A reduced residue system modulo $m$ is a set of integers $r_i$ such that $(r_i, m) =  1$, $r_i \not\equiv r_j$ (mod $m$) if $i \neq j$, and such that every $x$ prime to $m$ is congruent modulo $m$ to some member $r_i$ of the set. 
+\end{definition}
+
+\begin{theorem}
+	The number $\phi(m)$ is the number of positive integers less than or equal to $m$ that are relatively prime to $m$. 
+\end{theorem}
+
+\begin{theorem}
+	Let $(a, m) = 1$. Let $r_1, r_2, \ldots, r_n$ be a complete, or a reduced, residue system modulo $m$. Then $ar_1, ar_2, \ldots, ar_n$ is a complete, or a reduced, residue system, modulo $m$. 
+\end{theorem}
+
+\begin{theorem}
+	Fermat's Theorem. Let $p$ denote a prime. If $p \nmid a$ then $a^{p - 1} \equiv 1$ (mod $p$). For every integer $a$, $a^p \equiv a$ (mod $p$). 
+\end{theorem}
+
+\begin{theorem}
+	Euler generalization of Fermat's theorem. If $(a, m) = 1$, then 
+	{\center
+		$a^{\phi(m)} \equiv 1$ (mod $m$) \\
+	}
+\end{theorem}
+
+\begin{corollary}
+	If $(a, m) = 1$, then $ax \equiv b$ (mod $m$) has a solution $x = x_1$. All solutions are given by $x = x_1 + jm$ where $j = \pm1, \pm2, \ldots$. 
+\end{corollary}
+
+\begin{theorem}
+	Wilson's Theorem. If $p$ is a prime, then $(p - 1)! \equiv -1$ (mod $p$). 
+\end{theorem}
+
+\begin{theorem}
+	Let $p$ denote a prime. Then $x^2 \equiv -1$ (mod $p$) has solutions if and only if $p = 2$ or $p \equiv 1$ (mod 4). 
+\end{theorem}
+
+\begin{assignment}
+	NZM 2.1: 3, 9, 10, 14, 17, 18, 19, 24, 26
+\end{assignment}
+
+\section{Solutions of Congruences}
+
+\begin{definition}
+	Let $r_1, r_2, \ldots, r_m$ denote a complete residue system modulo $m$, The number of solutions $f(x) \equiv 0$ (mod $m$) is the number of the $r_i$ such that $f(r_i) \equiv 0$ (mod $m$).
+\end{definition}
+
+\begin{definition}
+	Let $f(X) = a_0x^n + a_1x^{n-1} + \ldots a_n$. IF $a_0 \equiv 0$ (mod $m$) the degree of the congruence $f(x) \equiv 0$ (mod $m$) is n. If $a_0 \equiv 0$ (mod $m$), let $j$ be the smalelst positive integer such that $a_j \not\equiv 0$ (mod $m$); then the degree of the congurnece is $n - j$. IF there is no such integer $j$, thjat is all the coefficients of $f(x)$ are multiples of $m$, no degree is assigned to the congruence. 
+\end{definition}
+
+\begin{theorem}
+	If $d \mid m$, and if $u$ is a solution of $f(x) \equiv 0$ (mod $m$), then $u$ is a solution of $f(x) \equiv 0$ (mod $d$). 
+\end{theorem}
+
+\begin{assignment}
+	None
+\end{assignment}
+
+\section{Chinese Remainder Theorem}
+
+\begin{theorem}
+	The congurnece $ax \equiv b$ (mod $m$) has exactly one solution if $(a, m) = 1$. More generally, if $g$ denotes the greatest common divisor $(a, m)$, the congruence is solvable if and only if $g \mid b$. IF $g \mid b$ the cognruence has exactly $g$ solutions $x \equiv x_0 + tm$ (mod $m$) for $t = 0, 1, \ldots, g - 1$, where $x_0$ is any solution of $(\frac{a}{g})x \equiv \frac{b}{g}$ (mod $\frac{m}{g}$)
+\end{theorem}
+
+\begin{theorem}
+	Given a cognruence $ax \equiv b$ (mod $m$), reduce it to $my \equiv - b$ (mod $a$). If $y_0$ is a solution of the reduced congruence, then $x_0$ defined by $x_0 = \frac{my_0 + b}{a}$ is a solution of the original congruence. 
+\end{theorem}
+
+\begin{theorem}
+	Chinese remainder theorem. Let $m_1, m_2, \ldots, m_r$ denote $r$ positive integers that a rrelatively prime in pairs, and let $a_1, a_2, \ldots, a_r$ denote any $r$ integers. Then the congruences $x \equiv a_i$ (mod $m_i$), $i = 1, 2, \ldots, r$ have common solutions. Any two solutions are congruent modulo $m_1m_2\ldots m_r$. 
+\end{theorem}
+
+\begin{assignment}
+	NZM 2.3: 1, 2, 4, 5, 6
+\end{assignment}
+
+\end{document}

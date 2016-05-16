@@ -1,0 +1,221 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[11pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+% \geometry{margin=2in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+% \usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+% These packages are all incorporated in the memoir class to one degree or another...
+\usepackage{amsmath}
+%%% HEADERS & FOOTERS
+\usepackage{fancyhdr} % This should be set AFTER setting up the page geometry
+\pagestyle{fancy} % options: empty , plain , fancy
+\renewcommand{\headrulewidth}{0pt} % customise the layout...
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+\usepackage{amssymb}
+
+%%% SECTION TITLE APPEARANCE
+\usepackage{sectsty}
+\allsectionsfont{\sffamily\mdseries\upshape} % (See the fntguide.pdf for font help)
+% (This matches ConTeXt defaults)
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} % Put the bibliography in the ToC
+\usepackage[titles,subfigure]{tocloft} % Alter the style of the Table of Contents
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} % No bold!
+
+%%% END Article customizations
+
+%%% Theorem Environment
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{problem}[1][Problem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+      \ifdim\lastskip<1.5em \hskip-\lastskip
+      \hskip1.5em plus0em minus0.5em \fi \nobreak
+      \vrule height0.75em width0.5em depth0.25em\fi}
+\usepackage{titling}
+\newcommand{\subtitle}[1]{%
+  \posttitle{%
+    \par\end{center}
+    \begin{center}\large#1\end{center}
+    \vskip0.5em}%
+}
+%%% END Theorem Environment
+
+%%% The "real" document content comes below...
+
+
+\title{Fourier Transform 1}
+\subtitle{MIT HSSP Summer 2015: July 12th}
+\author{Michael Lee}
+\date{July 17th, 2015} % Activate to display a given date or no date (if empty) % otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+
+\section{Delta Functions}
+
+
+\begin{definition}
+	Kronecker Delta Function. 
+	{\center
+		\[ \delta_{ij} = \begin{cases} 1 & \text{if } i = j \\ 0 & \text{if otherwise} \end{cases} \] \\
+	}
+\end{definition}
+
+\begin{definition}
+	Informal Dirac Delta Function. 
+	{\center
+		\[ \delta(x) = \begin{cases} \infty & \text{if } x = 0 \\ 0 & \text{if otherwise} \end{cases} \] \\
+	}
+\end{definition}
+
+\begin{definition}
+	Formal definition of Dirac $\delta(x)$. Let $(a, b) \in x$ define an interval of size $\Delta{x} = b - a $ such that there exists a function $\delta(x)$ such that $\lim_{\Delta{x} \to 0}\int_{a}^{b}\delta(x)\mathrm{d}x = 1$
+\end{definition}
+
+\begin{definition}
+	Riemann Sum. Integration of a function $f(x)$ over an interval $(a, b) \in x$ of $n$ partitions of size $\Delta{x} = \frac{b - a}{n}$. 
+	
+	{\center 
+		$\int_{a}^{b} f(x) \mathrm{d}x = \lim_{n \to \infty}\sum_{i = 0}^{n} f(i \cdot \Delta{x})\Delta{x}$ 
+	}
+\end{definition}
+
+\section{Finite Dimensional Vector Spaces}
+
+\begin{definition}
+	A vector space is a set of vectors $V$ that satisfy the field axioms. 
+\end{definition}
+
+
+\begin{definition}
+	A basis is orthogonal if $\langle e_i, e_j \rangle = 0 $ and $i \neq j$. A basis is orthonormal if it is orthogonal and contains all normalized vectors (i.e. $\langle e_i, e_j \rangle = \delta_{ij}$). 
+\end{definition}
+
+
+\begin{theorem}
+	Given a real vector space $V$ with an orthogonal basis $\lbrace e_1, e_2, \ldots, e_n \lbrace$, any vector $v \in V$ can be decomposed into a sum of basis vectors. The vector basis $\lbrace e_1, e_2, \ldots, e_n \rbrace$ of $V$ is the representation of a vector as a sum (linear combination) of other vectors. For any vector $v$, there will be a set of expansion coefficients $\lbrace c_1, c_2, \ldots, c_n \rbrace$, such that $v = c_1e_1 + c_2e_2 + \ldots + c_ne_n$.  
+	{\center
+		$v = \sum_{i = 1}^{n}{\langle e_i, v \rangle e_i }$ \\
+	}
+\end{theorem}
+
+\section{Infinite Dimensional Vector Spaces}
+
+\begin{definition}
+	We define an infinite dimensional vector space $V$ by extending the definition of its finite dimensional analogue. We simply allow functions to replace vectors. For a finite dimensional vector $v$, we denote $v(i)$ as the $i$th index of the vector $v$. This notation allows us to treat finite dimensional vectors as functions by mapping indices to coordinates. 
+\end{definition}
+
+\begin{remark}
+	Observe that no general finite basis exists since any arbitrary function $f \colon \mathbb{R} \to \mathbb{R} \in V$ has infinitely many dimensions and therefore infinitely many varying basis functions. 
+\end{remark}
+
+\begin{definition}
+	Let the basis functions of $V$ be the set of functions $e_x \colon \mathbb{R} \to \mathbb{R}$ such that for every $e_x, e_x(x') = \delta_{xx'}$. In other words, for every function $e_x$ in the basis, there is an argument $x'$ such that the basis function's value is the Kronecker delta of the $x$th basis function in the $x'$ index. Such a finite dimensional vector space is called orthonormal. 
+\end{definition}
+
+
+\begin{lemma} 
+	$\int_{-\infty}^{\infty}\delta(x'' - x') = 1$
+\end{lemma}
+
+
+\begin{proof}
+	From the Riemann definition of the integral 
+	
+	{\center
+		$\int_{-\infty}^{\infty}\delta(x'' - x') \mathrm{d}x' = \lim_{n \to \infty}\sum_{i = 1}^{n}\delta(i \cdot \Delta{x'})\Delta{x'}$ 
+	}
+	
+	Using the piecewise definition of the Dirac delta, if $x' \neq x$, the delta function would be zero and the summand will be zero. However as the interval size gets smaller, the area under the Dirac spike doesn't change and is still 1. Therefore:
+	{\center 
+		$\lim_{n \to \infty}\sum_{i = 1}^{n}\delta(i \cdot \Delta{x'})\Delta{x'} = 1 + 0 + 0 \ldots + 0$ \\
+		= 1 \\
+	}
+	\textbf{WTF?}: $ 0 \cdot \infty = 1 $ 
+\end{proof}
+
+\begin{theorem}
+	Let $V$ be an infinite dimensional vector space of functions $\mathbb{R} \to \mathbb{R}$ with a set of basis functions ${e}_i$. If $f \in V$, then the function $f$ can be expressed as the sum of basis functions.
+\end{theorem}
+
+\begin{proof}
+	Let $f \colon \mathbb{R} \to \mathbb{R} \in V$. 
+	
+	{\center 
+		$g(x'') = (\int_{-\infty}^{\infty}f(x')e_{x'} \mathrm{d}x')(x'') $ \\
+		$g(x'') = \int_{-\infty}^{\infty} f(x')e_{x'}(x'') \mathrm{d}x'$ \\
+		$g(x'') = \int_{-\infty}^{\infty}f(x')\delta(x'' - x') \mathrm{d}x'$ \\
+		
+	}
+	At this point we can substitute $f(x'')$ for $f(x')$ because unless $x'' = x'$, $\delta(x'' - x) = 0$ and the integrand vanishes. 
+	
+	{\center
+		$g(x'') = f(x'') \int_{-\infty}^{\infty}\delta(x'' - x') \mathrm{d}x' $ \\
+		$g(x'') = f(x'') \cdot 1$ (Lemma 3.1) \\
+		$g = f$ \\
+	}
+\end{proof}
+
+\begin{example}
+Suppose $f(x) = 1$. We want to integrate $e_x$ for every single possible $x$ to set the value of the function to 1 everywhere. Let $g \in V$ such that $g = \int_{-\infty}^{\infty}{e_{x'}} \mathrm{d}x'$. We want to confirm whether $g = f$ and so we test $g(3)$. 
+	{\center
+		$g(3) = (\int_{-\infty}^{\infty}e_{x'} \mathrm{d}x')(3)$ \\
+		$g(3) = \int_{-\infty}^{\infty}e_{x'}(3) \mathrm{d} x'$ \\
+		$g(3) = \int_{-\infty}^{\infty}\delta_{x'3} \mathrm{d}x'$\\ 
+	}
+	\textbf{Contradiction} Geometrically, $g(3)$ is the area under the curve of the Kronecker delta function; $g(3) = 0$. Since we can imagine the Kronecker delta as a function of a horizontal line $y = 0$ except at one point where there is a removed discontinuity at $x = 0$, $y = 1$. A single vertical line does not have any area. However, we assumed that $f(x) = 1$, therefore by contradiction, $f \neq g$. \\ 	To avoid the problem of nonexistant area, instead of the Kronecker delta, we use the Dirac delta. 
+
+	{\center
+		$g(3) = (\int_{-\infty}^{\infty}e_{x'} \mathrm{d}x')(3)$ \\
+		$g(3) = \int_{-\infty}^{\infty}e_{x'}(3) \mathrm{d} x'$ \\
+		$g(3) = \delta(x' - 3) \mathrm{d}x' $ \\
+		$g(3) = 1 $\\
+	}
+\end{example}
+
+
+\end{document}

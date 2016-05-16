@@ -1,0 +1,53 @@
+hist(rexp(1000, 0.2))
+
+means = NULL
+for (i in 1 : 1000) means = c(means, mean(rexp(40)))
+hist(means)
+
+mu    <- 1/lambda
+sigma <- 1/lambda
+ggplot() + aes(MNS) + 
+geom_histogram(alpha = .10, binwidth=0.1, colour = "black", aes(y = ..density..)) +
+stat_function(geom = "line", fun = dnorm, arg = list(mean = mu, sd = sigma/sqrt(40)),
+              size = 1, colour = "green", fill = NA)
+
+			  
+
+getGossetCI <- function(x, y) {
+	nX <- length(x)
+	nY <- length(y)
+	xBar<-mean(x)
+	yBar<-mean(y)
+	xVar<-(sd(x))^2
+	yVar<-(sd(y))^2
+	q<-(((xVar+yVar)/nX)^2)/((((xVar/nX)^2)+((yVar/nY)^2))/(nX - 1))
+	t<-qt(0.975, q)
+	return (yBar - xBar + c(-1,1)*t*sqrt(xVar/nX + yVar/nY))
+
+}
+
+getGossetCI <- function(nX, xBar, xSD, nY, yBar, ySD) {
+	xVar<-(xSD)^2
+	yVar<-(ySD)^2
+	q<-(((xVar+yVar)/nX)^2)/((((xVar/nX)^2)+((yVar/nY)^2))/(nX - 1))
+	t<-qt(0.975, q)
+	return (yBar - xBar + c(-1,1)*t*sqrt(xVar/nX + yVar/nY))
+
+}
+
+getGossetCI <- function(nX, xBar, xSD){
+	
+}
+x <- c("OJ", "VitC")
+n <- c(1, 2)
+F <- c(20.663, 16.963)
+L <- c(20.49198, 16.79198)
+U <- c( 28.234, 24.534)
+
+require(plotrix)
+plotCI(x, F, ui=U, li=L)
+
+
+labs<-sample(x,replace=TRUE)
+plotCI(n,F,ui = U, li = L,gap=0.02)
+text(n,F,labs)
